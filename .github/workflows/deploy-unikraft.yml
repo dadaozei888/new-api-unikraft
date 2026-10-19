@@ -14,4 +14,4 @@ jobs:
         run: printf '%s' "${{ secrets.UNIKRAFT_TOKEN }}" | unikraft login --token -
 
       - name: Run instance
-        run: unikraft run --metro sin --publish 443:8080/http+tls --publish 80:443/http+redirect -m 1024M --image "${{ secrets.UNIKRAFT_ORG }}/new-api:latest" -e PORT=8080 -e TZ=Asia/Shanghai -e SESSION_SECRET="${{ secrets.NEW_API_SESSION_SECRET }}"
+        run: unikraft run --metro sin --publish 443:8080/http+tls --publish 80:443/http+redirect -m 4096M --image "${{ secrets.UNIKRAFT_ORG }}/new-api:latest" -e PORT=8080 -e TZ=Asia/Shanghai -e SESSION_SECRET="${{ secrets.NEW_API_SESSION_SECRET }}"
