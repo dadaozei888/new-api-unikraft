@@ -1,0 +1,20 @@
+name: Create Unikraft Volume
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create-volume:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Unikraft CLI
+        uses: unikraft/setup-action@v1
+
+      - name: Login to Unikraft Cloud
+        run: printf '%s' "${{ secrets.UNIKRAFT_TOKEN }}" | unikraft login --token -
+
+      - name: Create volume
+        run: unikraft volumes create --metro sin --name new-api-data --size 2048M
+
+      - name: List volumes
+        run: unikraft volumes list
