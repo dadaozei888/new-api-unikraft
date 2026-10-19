@@ -14,7 +14,7 @@ jobs:
         run: printf '%s' "${{ secrets.UNIKRAFT_TOKEN }}" | unikraft login --token -
 
       - name: Create volume
-        run: unikraft volumes create --metro sin --name new-api-data --size 2048M
+        run: unikraft volumes create --metro sin --name new-api-data --size 1024M
 
       - name: List volumes
         run: unikraft volumes list
