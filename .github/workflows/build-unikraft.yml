@@ -1,0 +1,24 @@
+name: Build Unikraft image
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Unikraft CLI
+        uses: unikraft/setup-action@v1
+
+      - name: Setup BuildKit
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Unikraft Cloud
+        run: printf '%s' "${{ secrets.UNIKRAFT_TOKEN }}" | unikraft login --token -
+
+      - name: Build and push image
+        run: unikraft build . --output "${{ secrets.UNIKRAFT_ORG }}/new-api:latest"
